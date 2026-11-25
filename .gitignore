@@ -3,6 +3,10 @@
 /build-*/
 /out/
 CMakeUserPresets.json
+*.exe
+*.obj
+*.pdb
+*.ilk
 
 # IDE / 生成文件
 /.vs/
