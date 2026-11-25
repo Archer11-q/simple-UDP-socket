@@ -1,0 +1,22 @@
+# 构建产物
+/build/
+/build-*/
+/out/
+CMakeUserPresets.json
+
+# IDE / 生成文件
+/.vs/
+/.vscode/
+/.idea/
+*.user
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# 运行时生成
+config.ini
+*.log
+
+# 设计文档仅本地保留，不推送
+/docs/
