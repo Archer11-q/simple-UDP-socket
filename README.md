@@ -17,20 +17,46 @@
 
 ## 构建
 
-直接编译（需在 VS 开发者环境中执行）：
+### 前置条件
 
-```powershell
-cl /EHsc /std:c++17 /utf-8 /O2 /W4 src\main.cpp ws2_32.lib /Fe:udpdemo.exe
-```
+| 依赖 | 说明 |
+|---|---|
+| Visual Studio 2022 | 需安装「使用 C++ 的桌面开发」工作负载 |
+| CMake ≥ 3.21 | VS 自带一份，无需单独安装 |
+| Windows SDK | 随 C++ 工作负载一起安装 |
 
-或用 CMake：
+> 注意：CMake 安装时通常不会写入系统 PATH，普通终端里直接敲 `cmake` 可能提示找不到命令。下面两种方式任选。
+
+### 方式一：VS 开发者终端（推荐）
+
+开始菜单搜索 **Developer PowerShell for VS 2022**，进入后直接执行：
 
 ```powershell
 cmake -S . -B build -G "Visual Studio 17 2022" -A x64
 cmake --build build --config Release
 ```
 
+### 方式二：普通终端，用 VS 自带的 CMake
+
+```powershell
+$cmake = "${env:ProgramFiles}\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"
+& $cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+& $cmake --build build --config Release
+```
+
+VS 装在非默认盘（例如 `D:\Program Files\...`）时，把路径前缀换成实际位置。
+
+### 产物
+
+```
+build\Release\udpdemo.exe
+```
+
+清理构建：删除 `build\` 目录即可，该目录已在 `.gitignore` 中。
+
 ## 用法
+
+以下命令中的 `udpdemo` 均指 `build\Release\udpdemo.exe`。
 
 ```
 udpdemo send <ip> <port> <message...>              发送一条消息后退出
